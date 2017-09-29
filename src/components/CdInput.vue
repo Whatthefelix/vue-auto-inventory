@@ -3,6 +3,8 @@
     <input
       v-for="input in inputs"
       v-if="input.type === type"
+      @input="$emit('input', $event.target.value)"
+      :value="value"
       :type="input.type"
       :name="name"
       :placeholder="placeholder"
@@ -22,7 +24,8 @@ export default {
       type: String,
       required: false,
       default: 'text'
-    }
+    },
+    value: String
   },
 
   data () {

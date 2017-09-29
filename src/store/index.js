@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    user: undefined
+    user: localStorage.getItem('jwt')
   },
 
   mutations: {
@@ -13,7 +13,8 @@ const store = new Vuex.Store({
       state.user = user;
     },
 
-    logout (state, user) {
+    logout (state) {
+      localStorage.removeItem('jwt');
       state.user = undefined;
     }
   }

@@ -6,9 +6,30 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'app'
-}
+  name: 'app',
+
+  methods: {
+    checkUser () {
+      // check JWT
+      if (localStorage.getItem('jwt')) {
+        // set state user
+        this.$store.commit('login', localStorage.getItem('jwt'));
+      } else {
+        this.$router.push('/');
+      }
+    }
+  },
+
+  created () {
+    if (localStorage.getItem('jwt')) {
+      axios.defaults.headers.common['Authorization'] = localStorage.getItem('jwt');
+    }
+    this.checkUser();
+  }
+};
 </script>
 
 <style>
